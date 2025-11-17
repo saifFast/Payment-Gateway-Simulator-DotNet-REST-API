@@ -10,7 +10,7 @@ namespace PaymentGateway.Services
         private readonly ILogger<PaymentService> _logger;
         private readonly Random _rng = new();
 
-        public PaymentService(IPaymentRepository repo, ILogger<PaymentService> logger)
+        public PaymentService(IPaymentRepository repo, ILogger<PaymentService> logger)  
         {
             _repo = repo;
             _logger = logger;

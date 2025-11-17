@@ -16,7 +16,6 @@
     <Folder Include="Auth\" />
     <Folder Include="Logging\" />
     <Folder Include="Docs\" />
-    <Folder Include="Services\" />
   </ItemGroup>
 
 </Project>

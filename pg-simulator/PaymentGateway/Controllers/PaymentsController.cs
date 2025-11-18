@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using PaymentGateway;
 using PaymentGateway.DTOs;
 using PaymentGateway.Services;
 
@@ -18,13 +18,13 @@ public class PaymentsController : ControllerBase
     }
 
     [Authorize]
-    [HttpPost("pay")]
+    [HttpPost("payment")]
     public async Task<IActionResult> Pay([FromBody] PaymentRequest request)
     {
         if (request.Amount <= 0) return BadRequest("Amount must be > 0");
 
         var res = await _service.ProcessPaymentAsync(request);
-        if (res.Status == "SUCCESS") return Ok(res);
+        if (res.Status == PaymentStages.SUCCESS.ToString()) return Ok(res);
         return BadRequest(res);
     }
 
@@ -33,7 +33,7 @@ public class PaymentsController : ControllerBase
     public async Task<IActionResult> Refund([FromBody] RefundRequest request)
     {
         var res = await _service.ProcessRefundAsync(request);
-        if (res.Status == "SUCCESS") return Ok(res);
+        if (res.Status == PaymentStages.SUCCESS.ToString()) return Ok(res);
         return BadRequest(res);
     }
 

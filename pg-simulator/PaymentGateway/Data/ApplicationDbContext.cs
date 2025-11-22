@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PaymentGateway.Models;
-using System.Collections.Generic;
 
 namespace PaymentGateway.Data
 {

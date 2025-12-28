@@ -1,6 +1,6 @@
 ﻿using PaymentGateway.Data;
-using PaymentGateway.Models;
 using Microsoft.EntityFrameworkCore;
+using PaymentGateway.Shared.Models;
 
 public class PaymentRepository : IPaymentRepository
 {

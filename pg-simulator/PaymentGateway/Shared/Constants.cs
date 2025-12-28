@@ -1,4 +1,4 @@
-﻿namespace PaymentGateway
+﻿namespace PaymentGateway.Shared
 {
     public enum PaymentStages
     {

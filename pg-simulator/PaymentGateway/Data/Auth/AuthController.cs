@@ -5,7 +5,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace PaymentGateway.Auth
+namespace PaymentGateway.Data.Auth
 {
     [ApiController]
     [Route("auth")]

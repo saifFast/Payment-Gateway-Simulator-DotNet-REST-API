@@ -1,5 +1,6 @@
-﻿using PaymentGateway.DTOs;
-using PaymentGateway.Models;
+﻿using PaymentGateway.Shared.Models;
+using PaymentGateway.Shared.DTOs.Requests;
+using PaymentGateway.Shared.DTOs.Responses;
 
 namespace PaymentGateway.Services
 {

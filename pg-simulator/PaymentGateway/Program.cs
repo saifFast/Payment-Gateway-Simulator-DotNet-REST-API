@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using PaymentGateway.Auth;
 using PaymentGateway.Data;
+using PaymentGateway.Data.Auth;
 using PaymentGateway.Services;
 using Serilog;
 using System.Text;

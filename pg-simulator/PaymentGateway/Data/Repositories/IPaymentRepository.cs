@@ -1,4 +1,4 @@
-﻿using PaymentGateway.Models;
+﻿using PaymentGateway.Shared.Models;
 
 public interface IPaymentRepository
 {

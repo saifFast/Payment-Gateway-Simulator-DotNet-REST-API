@@ -1,4 +1,5 @@
-﻿using PaymentGateway.DTOs;
+﻿using PaymentGateway.Shared.DTOs.Requests;
+using PaymentGateway.Shared.DTOs.Responses;
 
 namespace PaymentGateway.Services
 {

@@ -1,20 +1,18 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using PaymentGateway;
-using PaymentGateway.DTOs;
 using PaymentGateway.Services;
+using PaymentGateway.Shared;
+using PaymentGateway.Shared.DTOs.Requests;
 
 [ApiController]
 [Route("api")]
 public class PaymentsController : ControllerBase
 {
     private readonly IPaymentService _service;
-    private readonly ILogger<PaymentsController> _logger;
 
-    public PaymentsController(IPaymentService service, ILogger<PaymentsController> logger)
+    public PaymentsController(IPaymentService service)
     {
         _service = service;
-        _logger = logger;
     }
 
     [Authorize]

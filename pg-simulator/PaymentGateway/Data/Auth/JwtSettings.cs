@@ -1,4 +1,4 @@
-﻿namespace PaymentGateway.Auth
+﻿namespace PaymentGateway.Data.Auth
 {
     public class JwtSettings
     {

@@ -1,4 +1,4 @@
-﻿namespace PaymentGateway.Models
+﻿namespace PaymentGateway.Shared.Models
 {
     public class RefundTransaction
     {

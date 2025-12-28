@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Docs\" />
+    <Folder Include="Shared\Documentation\" />
   </ItemGroup>
 
 </Project>

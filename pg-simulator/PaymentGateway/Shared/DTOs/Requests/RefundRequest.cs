@@ -1,4 +1,4 @@
-﻿namespace PaymentGateway.DTOs
+﻿namespace PaymentGateway.Shared.DTOs.Requests
 {
     public class RefundRequest
     {

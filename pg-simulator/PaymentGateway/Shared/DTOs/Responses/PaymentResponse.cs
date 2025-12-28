@@ -1,4 +1,4 @@
-﻿namespace PaymentGateway.DTOs
+﻿namespace PaymentGateway.Shared.DTOs.Responses
 {
     public class PaymentResponse
     {

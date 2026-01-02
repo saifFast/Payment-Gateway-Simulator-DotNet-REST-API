@@ -7,13 +7,11 @@ namespace PaymentGateway.Services
     public class PaymentService : IPaymentService
     {
         private readonly IPaymentRepository _repo;
-        private readonly ILogger<PaymentService> _logger;
         private readonly Random _rng = new();
 
-        public PaymentService(IPaymentRepository repo, ILogger<PaymentService> logger)     
+        public PaymentService(IPaymentRepository repo)
         {
             _repo = repo;
-            _logger = logger;
         }
 
         public async Task<PaymentResponse> ProcessPaymentAsync(PaymentRequest request)
@@ -32,8 +30,7 @@ namespace PaymentGateway.Services
 
                 await _repo.AddPaymentAsync(txn);
 
-                _logger.LogInformation("Payment {OrderId} processed with status {Status}", txn.OrderId, txn.Status);
-
+                
                 return new PaymentResponse
                 {
                     TransactionId = txn.TransactionId,
@@ -57,15 +54,14 @@ namespace PaymentGateway.Services
             var txn = await _repo.GetPaymentByIdAsync(refundRequest.TransactionId);
 
             if (txn == null || txn.Status == "SUCCESS")
-                return new RefundResponse() {RefundId = "-1", Status = "Transaction Not found" , Message = "Failed to Process Refund" };
+                return new RefundResponse() { RefundId = "-1", Status = "Transaction Not found", Message = "Failed to Process Refund" };
 
             var roll = _rng.NextDouble();
             var refundStatus = roll < 0.8 ? "SUCCESS" : "FAILED"; // 80% refund success
-            var refundTxn = new RefundTransaction() {TransactionId = refundRequest.TransactionId, Amount = refundRequest.Amount, Status = "REFUND", CreatedAt = DateTime.Now };
+            var refundTxn = new RefundTransaction() { TransactionId = refundRequest.TransactionId, Amount = refundRequest.Amount, Status = "REFUND", CreatedAt = DateTime.Now };
 
             await _repo.AddRefundAsync(refundTxn);
-            _logger.LogInformation("Refund for {Txn} status {Status}", txn.TransactionId, refundStatus);
-
+            
             return new RefundResponse
             {
                 RefundId = refundTxn.RefundId,
@@ -73,7 +69,7 @@ namespace PaymentGateway.Services
                 Message = refundTxn.Status == "SUCCESS" ? "Refund processed" : "Refund failed (simulated)"
             };
         }
-       
+
         public async Task<object?> GetStatusAsync(string transactionId)
         {
             var txn = await _repo.GetPaymentByIdAsync(transactionId);

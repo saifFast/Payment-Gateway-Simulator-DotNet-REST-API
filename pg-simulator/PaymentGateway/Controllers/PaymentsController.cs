@@ -4,43 +4,47 @@ using PaymentGateway.Services;
 using PaymentGateway.Shared;
 using PaymentGateway.Shared.DTOs.Requests;
 
-[ApiController]
-[Route("api")]
-public class PaymentsController : ControllerBase
+namespace PaymentGateway.Controllers
 {
-    private readonly IPaymentService _service;
 
-    public PaymentsController(IPaymentService service)
+    [ApiController]
+    [Route("api")]
+    public class PaymentsController : ControllerBase
     {
-        _service = service;
-    }
+        private readonly IPaymentService _service;
 
-    [Authorize]
-    [HttpPost("payment")]
-    public async Task<IActionResult> Pay([FromBody] PaymentRequest request)
-    {
-        if (request.Amount <= 0) return BadRequest("Amount must be > 0");
+        public PaymentsController(IPaymentService service)
+        {
+            _service = service;
+        }
 
-        var res = await _service.ProcessPaymentAsync(request);
-        if (res.Status == PaymentStages.SUCCESS.ToString()) return Ok(res);
-        return BadRequest(res);
-    }
+        [Authorize]
+        [HttpPost("payment")]
+        public async Task<IActionResult> Pay([FromBody] PaymentRequest request)
+        {
+            if (request.Amount <= 0) return BadRequest("Amount must be > 0");
 
-    [Authorize]
-    [HttpPost("refund")]
-    public async Task<IActionResult> Refund([FromBody] RefundRequest request)
-    {
-        var res = await _service.ProcessRefundAsync(request);
-        if (res.Status == PaymentStages.SUCCESS.ToString()) return Ok(res);
-        return BadRequest(res);
-    }
+            var res = await _service.ProcessPaymentAsync(request);
+            if (res.Status == PaymentStages.SUCCESS.ToString()) return Ok(res);
+            return BadRequest(res);
+        }
 
-    [Authorize]
-    [HttpGet("status/{transactionId}")]
-    public async Task<IActionResult> Status(string transactionId)
-    {
-        var res = await _service.GetStatusAsync(transactionId);
-        if (res == null) return NotFound();
-        return Ok(res);
+        [Authorize]
+        [HttpPost("refund")]
+        public async Task<IActionResult> Refund([FromBody] RefundRequest request)
+        {
+            var res = await _service.ProcessRefundAsync(request);
+            if (res.Status == PaymentStages.SUCCESS.ToString()) return Ok(res);
+            return BadRequest(res);
+        }
+
+        [Authorize]
+        [HttpGet("status/{transactionId}")]
+        public async Task<IActionResult> Status(string transactionId)
+        {
+            var res = await _service.GetStatusAsync(transactionId);
+            if (res == null) return NotFound();
+            return Ok(res);
+        }
     }
 }

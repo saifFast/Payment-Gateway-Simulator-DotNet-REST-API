@@ -1,11 +1,6 @@
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
 using PaymentGateway.Data;
 using PaymentGateway.Services;
-using Serilog;
-using System.Reflection;
-using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -39,7 +34,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 
-    app.MapControllers();
+app.MapControllers();
 
 
 app.Run();

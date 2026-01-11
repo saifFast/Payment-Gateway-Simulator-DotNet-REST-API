@@ -55,9 +55,7 @@ namespace PaymentGateway.Services
 
             if (txn == null || txn.Status == "SUCCESS")
                 return new RefundResponse() { RefundId = "-1", Status = "Transaction Not found", Message = "Failed to Process Refund" };
-
-            var roll = _rng.NextDouble();
-            var refundStatus = roll < 0.8 ? "SUCCESS" : "FAILED"; // 80% refund success
+        
             var refundTxn = new RefundTransaction() { TransactionId = refundRequest.TransactionId, Amount = refundRequest.Amount, Status = "REFUND", CreatedAt = DateTime.Now };
 
             await _repo.AddRefundAsync(refundTxn);
@@ -66,7 +64,7 @@ namespace PaymentGateway.Services
             {
                 RefundId = refundTxn.RefundId,
                 Status = refundTxn.Status,
-                Message = refundTxn.Status == "SUCCESS" ? "Refund processed" : "Refund failed (simulated)"
+                Message = refundTxn.Status == "REFUND" ? "Refund processed" : "Refund failed (simulated)"
             };
         }
 

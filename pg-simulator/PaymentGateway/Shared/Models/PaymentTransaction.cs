@@ -1,8 +1,13 @@
-﻿namespace PaymentGateway.Shared.Models
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
+
+namespace PaymentGateway.Shared.Models
 {
     public class PaymentTransaction
     {
-        public string TransactionId { get; set; } = Guid.NewGuid().ToString();
+        
+        [Key]
+        public string TransactionId { get; set; } = "TXN-"+Guid.NewGuid().ToString();
         public string OrderId { get; set; } = string.Empty;
         public string CustomerId { get; set; } = string.Empty;
         public decimal Amount { get; set; } = 0;
